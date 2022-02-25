@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Author: havain
+ * @Date: 2022-02-25 11:43:37
+ * @LastEditors: havain
+ * @LastEditTime: 2022-02-25 11:49:10
+-->
 # teleop_twist_keyboard
 Generic Keyboard Teleop for ROS
 
@@ -66,3 +74,7 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py _key_timeout:=0.6
 ```
 
 It is recommended that you set `key_timeout` higher than the initial key repeat delay on your system (This delay is 0.5 seconds by default on Ubuntu, but can be adjusted).
+
+
+# add some change by havain
+change the repeat times and space key to stop

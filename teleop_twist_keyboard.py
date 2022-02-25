@@ -28,7 +28,7 @@ For Holonomic mode (strafing), hold down the shift key:
 t : up (+z)
 b : down (-z)
 
-anything else : stop
+space: stop
 
 q/z : increase/decrease max speeds by 10%
 w/x : increase/decrease only linear speed by 10%
@@ -166,9 +166,9 @@ if __name__=="__main__":
 
     rospy.init_node('teleop_twist_keyboard')
 
-    speed = rospy.get_param("~speed", 0.5)
-    turn = rospy.get_param("~turn", 1.0)
-    repeat = rospy.get_param("~repeat_rate", 0.0)
+    speed = rospy.get_param("~speed", 0.2)
+    turn = rospy.get_param("~turn", 0.5)
+    repeat = rospy.get_param("~repeat_rate", 5)
     key_timeout = rospy.get_param("~key_timeout", 0.0)
     if key_timeout == 0.0:
         key_timeout = None
@@ -187,8 +187,10 @@ if __name__=="__main__":
 
         print(msg)
         print(vels(speed,turn))
+        flag = False
         while(1):
             key = getKey(key_timeout)
+
             if key in moveBindings.keys():
                 x = moveBindings[key][0]
                 y = moveBindings[key][1]
@@ -205,12 +207,11 @@ if __name__=="__main__":
             else:
                 # Skip updating cmd_vel if key timeout and robot already
                 # stopped.
-                if key == '' and x == 0 and y == 0 and z == 0 and th == 0:
-                    continue
-                x = 0
-                y = 0
-                z = 0
-                th = 0
+                if (key == '\x20'):
+                    x = 0
+                    y = 0
+                    z = 0
+                    th = 0
                 if (key == '\x03'):
                     break
  
